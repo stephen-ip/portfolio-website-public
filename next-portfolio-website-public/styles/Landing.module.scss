@@ -1,0 +1,22 @@
+@use "variables";
+
+.landing {
+  // background-color: variables.$primary-bg-color;\
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: black;
+}
+
+@media (max-width: 1400px) {
+  .landing {
+    background-color: variables.$primary-bg-color;
+  }
+}
+
+@media (max-height: 1200px) {
+  .landing {
+    background-color: variables.$primary-bg-color;
+  }
+}

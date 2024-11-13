@@ -1,0 +1,152 @@
+@use "variables";
+
+.navbar {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  padding: 10px 50px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: variables.$primary-bg-color;
+  z-index: 10;
+}
+
+.brand-title {
+  font-size: 1.5rem;
+  margin: 0.5rem;
+  width: 34.59px;
+  height: 32px;
+  text-decoration: none;
+  color: variables.$primary-text-color;
+  z-index: 100;
+
+  img {
+    margin: 0;
+    border-radius: 50%;
+    border: 2px solid variables.$highlight-color;
+    box-shadow: 0px 0px 6px 2px variables.$highlight-color;
+
+    &:hover {
+      transform: scale(1.07);
+    }
+  }
+}
+
+.navbar-links {
+  height: 100%;
+}
+
+.navbar-links ul {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 20px;
+  list-style: none;
+}
+
+.navbar-links li {
+  display: block;
+  color: variables.$primary-text-color;
+  cursor: pointer;
+
+  a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+  }
+}
+
+.navbar-links li:hover {
+  background-color: #555;
+  border-radius: 4px;
+}
+
+// .active {
+//   font-weight: bold;
+//   border-bottom: 1px solid white;
+// }
+
+.navbarmobile {
+  display: none;
+}
+
+.hamburger {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 30px;
+  height: 21px;
+  cursor: pointer;
+}
+
+@media (max-width: 750px) {
+  .navbar {
+    display: none;
+  }
+
+  .navbarmobile {
+    display: flex;
+    position: fixed;
+    width: 100%;
+    padding: 10px 20px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: variables.$primary-bg-color;
+    z-index: 10;
+
+    .navbarmobile-links {
+      position: fixed;
+      left: 0;
+      top: -220px;
+      opacity: 0;
+      width: 100%;
+      background-color: variables.$primary-bg-color;
+      padding-bottom: 10px;
+      transition: 1s;
+
+      a:hover {
+        color: variables.$highlight-color;
+      }
+    }
+
+    // .navbarmobile-links:active {
+    //   background-color: red;
+    // }
+
+    ul {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: variables.$primary-text-color;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        display: block;
+        color: variables.$primary-text-color;
+        cursor: pointer;
+        width: 100%;
+        text-align: center;
+
+        a {
+          display: block;
+          width: 100%;
+          height: 100%;
+          padding: 1rem;
+        }
+      }
+    }
+  }
+
+  .hamburger {
+    display: flex;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+  }
+}

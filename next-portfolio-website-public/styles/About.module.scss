@@ -1,0 +1,125 @@
+@use "variables";
+
+.about {
+  min-height: 100vh;
+  width: 100%;
+  background-color: variables.$primary-bg-color;
+  padding: 68px 10px;
+}
+
+.header {
+  padding-left: 6%;
+}
+
+.title {
+  display: inline-block;
+  padding-bottom: 8px;
+  margin-bottom: 0px;
+  font-size: 30px;
+  color: variables.$primary-text-color;
+  padding-bottom: 10px;
+  letter-spacing: 6px;
+  border-bottom: 2px solid variables.$primary-text-color;
+}
+
+.subtitle {
+  font-size: 20px;
+  letter-spacing: 3px;
+  color: variables.$highlight-color;
+}
+
+.content {
+  padding-left: 6%;
+  margin-top: 2%;
+  display: flex;
+  align-items: center;
+  gap: 15%;
+  font-size: larger;
+}
+
+.bio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid variables.$highlight-color;
+  border-radius: 4px;
+  padding: 20px;
+  width: 50%;
+  min-width: 50%;
+}
+
+.pfp {
+  display: flex;
+}
+
+.pfpimg {
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: 0 15%;
+}
+
+.experienceHeader {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  img {
+    width: 80px;
+  }
+}
+
+.vertical-timeline-element-title {
+  margin: 0;
+  padding: 0;
+  color: variables.$primary-text-color;
+}
+
+.vertical-timeline-element-subtitle {
+  margin: 3px 0 0 0;
+  padding: 0;
+}
+
+.vertical-timeline-element-description p {
+  a:hover {
+    color: variables.$highlight-color;
+  }
+}
+
+@media (max-width: 1170px) {
+  .content {
+    flex-direction: column-reverse;
+    gap: 20px;
+    padding-left: 0;
+
+    .pfp {
+      margin-right: 0 !important;
+    }
+  }
+
+  .bio {
+    width: 90%;
+  }
+}
+
+@media (max-width: 300px) {
+  .experienceHeader img {
+    width: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .pfpimg {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+@media (min-width: 700px) {
+  .pfpimg {
+    width: 300px;
+    height: 300px;
+  }
+}

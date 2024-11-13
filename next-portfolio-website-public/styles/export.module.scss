@@ -1,0 +1,14 @@
+@use "variables";
+
+:export {
+  primaryBgColor: variables.$primary-bg-color;
+  secondaryBgColor: variables.$secondary-bg-color;
+  primaryTextColor: variables.$primary-text-color;
+  secondaryTextColor: variables.$secondary-text-color;
+  highlightColor: variables.$highlight-color;
+  berkeleyBlue: variables.$berkeley-blue;
+  californiaGold: variables.$california-gold;
+  metallicGold: variables.$metallic-gold;
+  foundersRock: variables.$founders-rock;
+  medalist: variables.$medalist;
+}

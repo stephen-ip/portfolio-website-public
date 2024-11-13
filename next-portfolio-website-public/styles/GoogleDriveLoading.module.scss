@@ -1,0 +1,259 @@
+$line-len: 2117;
+$ani-length: 3s;
+$green: #11a861;
+$yellow: #ffcf63;
+$blue: #3777e3;
+
+@function pow($number, $exp) {
+  $value: 1;
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
+    }
+  } @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+  @return $value;
+}
+
+@function fact($number) {
+  $value: 1;
+  @if $number > 0 {
+    @for $i from 1 through $number {
+      $value: $value * $i;
+    }
+  }
+  @return $value;
+}
+
+@function pi() {
+  @return 3.14159265359;
+}
+
+@function rad($angle) {
+  $unit: unit($angle);
+  $unitless: $angle / ($angle * 0 + 1);
+  // If the angle has 'deg' as unit, convert to radians.
+  @if $unit==deg {
+    $unitless: $unitless / 180 * pi();
+  }
+  @return $unitless;
+}
+
+@function sin($angle) {
+  $sin: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+  }
+  @return $sin;
+}
+
+@function cos($angle) {
+  $cos: 0;
+  $angle: rad($angle);
+  // Iterate a bunch of times.
+  @for $i from 0 through 10 {
+    $cos: $cos + pow(-1, $i) * pow($angle, 2 * $i) / fact(2 * $i);
+  }
+  @return $cos;
+}
+
+@function tan($angle) {
+  @return sin($angle) / cos($angle);
+}
+
+@mixin shift($distance, $angle) {
+  $angle: ($angle + 90);
+  $y: $distance * cos($angle);
+  $x: $distance * sin($angle);
+  transform: translate3d($x, $y, 0);
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.svg {
+  width: 30px;
+  // animation: logo $ani-length infinite;
+  animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  transform-origin: center;
+}
+
+.clip {
+  fill: none;
+}
+
+#colour,
+#grey {
+  .green path {
+    transform-origin: center;
+    @include shift(-$line-len - 1000px, 60deg);
+  }
+  .yellow path {
+    transform-origin: center;
+    @include shift(-$line-len - 1000px, 300deg);
+  }
+  .blue path {
+    transform-origin: center;
+    @include shift(-$line-len - 1000px, 180deg);
+    // animation-delay: $ani-length*0.4;
+  }
+  .green path,
+  .yellow path,
+  .blue path {
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-timing-function: cubic-bezier(0.19, 1, 0.22, 1);
+  }
+}
+
+#grey {
+  .yellow path {
+    fill: rgba(220, 220, 220, 1);
+    animation: grey-yellow $ani-length;
+  }
+  .green path {
+    fill: rgba(210, 210, 210, 1);
+    animation: grey-green $ani-length;
+  }
+  .blue path {
+    fill: rgba(230, 230, 230, 1);
+    animation: grey-blue $ani-length;
+  }
+  path {
+    animation-iteration-count: 1 !important;
+    // animation-iteration-count: infinite!important;
+    transform: none !important;
+  }
+}
+
+#colour {
+  .green path {
+    fill: $green;
+    animation: greenKeyFrames $ani-length;
+  }
+  .yellow path {
+    fill: $yellow;
+    animation: yellowKeyFrames $ani-length;
+  }
+  .blue path {
+    fill: $blue;
+    animation: blueKeyFrames $ani-length;
+  }
+  path {
+    // animation-delay: $ani-length !important;  // REMOVED TO MAKE ANIMATION PLAY RIGHT AWAY
+    animation-iteration-count: infinite !important;
+    // animation: none!important;
+    // opacity:0;
+  }
+}
+
+@keyframes greenKeyFrames {
+  0% {
+    @include shift(-$line-len - 1000px, 60deg);
+  }
+  33% {
+    @include shift(-1000px, 60deg);
+  }
+  66% {
+    @include shift(0, 60deg);
+  }
+  100% {
+    @include shift($line-len + 0px, 60deg);
+  }
+}
+
+@keyframes yellowKeyFrames {
+  0% {
+    @include shift(-$line-len - 1000px, 300deg);
+  }
+  13% {
+    @include shift(-$line-len - 1000px, 300deg);
+  }
+  46% {
+    @include shift(-1000px, 300deg);
+  }
+  66% {
+    @include shift(0, 300deg);
+  }
+  100% {
+    @include shift($line-len + 0px, 300deg);
+  }
+}
+
+@keyframes blueKeyFrames {
+  0% {
+    @include shift(-$line-len - 1000px, 180deg);
+  }
+  23% {
+    @include shift(-$line-len - 1000px, 180deg);
+  }
+  56% {
+    @include shift(-1000px, 180deg);
+  }
+  66% {
+    @include shift(0, 180deg);
+  }
+  100% {
+    @include shift($line-len + 0px, 180deg);
+  }
+}
+
+@keyframes grey-green {
+  0% {
+    @include shift(-$line-len - 1000px, 60deg);
+  }
+  33% {
+    @include shift(-1000px, 60deg);
+  }
+}
+
+@keyframes grey-yellow {
+  0% {
+    @include shift(-$line-len - 1000px, 300deg);
+  }
+  13% {
+    @include shift(-$line-len - 1000px, 300deg);
+  }
+  46% {
+    @include shift(-1000px, 300deg);
+  }
+}
+
+@keyframes grey-blue {
+  0% {
+    @include shift(-$line-len - 1000px, 180deg);
+  }
+  23% {
+    @include shift(-$line-len - 1000px, 180deg);
+  }
+  56% {
+    @include shift(-1000px, 180deg);
+  }
+}
+
+@keyframes logo {
+  0% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  66% {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(60deg) scale(0);
+  }
+}

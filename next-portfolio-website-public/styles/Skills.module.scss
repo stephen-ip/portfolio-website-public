@@ -1,0 +1,67 @@
+@use "variables";
+
+.skills {
+  // min-height: 100vh;
+  margin-bottom: 100px;
+}
+
+.slider {
+  height: 100px;
+  margin: 0;
+  position: absolute;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
+  background-color: variables.$primary-bg-color;
+}
+
+.slide-track {
+  display: flex;
+  width: calc(
+    100px * 46
+  ); // individual item length * total number of items ( 2 * 22)
+  animation: scroll 40s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100px * 23)); // move item leftwards by half
+  }
+}
+
+.slide-track svg {
+  height: 100px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.slider::before,
+.slider::after {
+  background: linear-gradient(
+    to right,
+    rgba(10, 25, 47, 1) 0%,
+    rgba(10, 25, 47, 0) 100%
+  );
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 15%;
+  z-index: 2;
+}
+
+.slider::before {
+  left: 0;
+  top: 0;
+}
+
+.slider::after {
+  right: 0;
+  top: 0;
+  transform: rotateZ(180deg);
+}
